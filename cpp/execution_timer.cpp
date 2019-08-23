@@ -1,9 +1,9 @@
-// usage: EXEC_TIME(block_name)
 #pragma once
 #include <time.h>
 #include <cstdio>
 
 namespace NSild {
+
 struct TExecTime {
     TExecTime(const char* aId)
     : Id(aId), ExecStart(clock()) 
@@ -23,7 +23,12 @@ struct TExecTime {
     const clock_t ExecStart;
     bool Dumped = false;
 };
+
 }
-#define EXEC_TIME(x) const auto& some_var = ::NSild::TExecTime(x)
+#define EXEC_TIME(x) const auto& _exec_time_x = ::NSild::TExecTime(x)
+
+// int main() {
+//     EXEC_TIME("block_name");
+// }
 
 
