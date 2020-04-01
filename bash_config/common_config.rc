@@ -1,11 +1,11 @@
 # prompt
 
-DARK_GRAY="\e[90m"
-RED="\e[31m"
-WHITE="\e[0m"
-CYAN="\e[36m"
-BLUE="\e[01;34m"
-PINK="\e[01;35m"
+DARK_GRAY="\[\033[90m\]"
+RED="\[\033[31m\]"
+WHITE="\[\033[0m\]"
+CYAN="\[\033[36m\]"
+BLUE="\[\033[01;34m\]"
+PINK="\[\033[01;35m\]"
 PROMPT_COMMAND='
 LAST_CODE=$?
 VENV=""
