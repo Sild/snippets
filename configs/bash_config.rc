@@ -12,12 +12,16 @@ VENV=""
 if [[ ${VIRTUAL_ENV} ]]; then
 	VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
 fi
+HOSTNAME="\h"
+if [ "$(hostname)" = "d-korchagin" ]; then
+    HOSTNAME="macpro"
+fi 
 PS1="\D{%T} ${VENV}"
 
 if [ ${LAST_CODE} = 0 ]; then 
-	PS1="${PS1}${CYAN}\u@\h"
+	PS1="${PS1}${CYAN}\u@${HOSTNAME}"
 else 
-	PS1="${PS1}${RED}\u@\h"
+	PS1="${PS1}${RED}\u@${HOSTNAME}"
 fi
 PS1="${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
 
