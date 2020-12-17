@@ -26,6 +26,8 @@ fi
 PS1="${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
 
 '
+export GREP_OPTIONS='--color=always'
+export GREP_COLOR='1;35;40'
 
 # common aliases
 alias gitbr="git branch"
