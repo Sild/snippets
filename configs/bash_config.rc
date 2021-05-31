@@ -14,7 +14,10 @@ if [[ ${VIRTUAL_ENV} ]]; then
 fi
 HOSTNAME="\h"
 if [ "$(hostname)" = "d-korchagin" ]; then
-    HOSTNAME="macpro"
+    HOSTNAME="mac15"
+fi 
+if [ "$(hostname)" = "d-korchagin2" ]; then
+    HOSTNAME="mac13"
 fi 
 PS1="\D{%T} ${VENV}"
 
