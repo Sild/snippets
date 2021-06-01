@@ -10,10 +10,13 @@ url = sys.argv[1]
 raw_params = url[url.find("?") + 1:]
 
 splitted = [p.split("=") for p in raw_params.split("&")]
-kv_params = {p[0]:p[1] for p in splitted if len(p) == 2}
-for p in splitted:
-    if len(p) != 2:
-        print("fail to parse param:", p)       
 
-for k, v in kv_params.items():
-    print(k, ": ", v)
+subreq_num = 0
+for kvpair in splitted:
+    if not len(kvpair) == 2:
+       continue
+    if kvpair[0] == "req":
+        subreq_num += 1
+        print(f"\n==={kvpair[0]} {subreq_num}:===")
+    else:
+        print(f"{kvpair[0]}: {kvpair[1]}")
