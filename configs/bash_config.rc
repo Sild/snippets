@@ -1,4 +1,7 @@
 # prompt
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
 if [ -t 0 ] ; then  # input is a terminal
     DARK_GRAY="\[\033[90m\]"
     RED="\[\033[31m\]"
@@ -12,11 +15,16 @@ if [ -t 0 ] ; then  # input is a terminal
     if [[ ${VIRTUAL_ENV} ]]; then
         VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
     fi
+    GITBR="$(parse_git_branch)"
+    GITBRANCH=""
+    if [[ ${GITBR} ]]; then
+        GITBRANCH="${PINK}${GITBR} "
+    fi
     HOSTNAME="\h"
     if [ "${HOSTNAME_MANUAL}" ]; then
         HOSTNAME="${HOSTNAME_MANUAL}"
     fi
-    PS1="\D{%T} ${VENV}"
+    PS1="\D{%T} ${VENV}${GITBRANCH}"
 
     if [ ${LAST_CODE} = 0 ]; then
         PS1="${PS1}${CYAN}\u@${HOSTNAME}"
