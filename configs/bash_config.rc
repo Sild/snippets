@@ -13,11 +13,8 @@ if [ -t 0 ] ; then  # input is a terminal
         VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
     fi
     HOSTNAME="\h"
-    if [ "$(hostname)" = "d-korchagin" ]; then
-        HOSTNAME="mac15"
-    fi
-    if [ "$(hostname)" = "d-korchagin2" ]; then
-        HOSTNAME="mac13"
+    if [ "${HOSTNAME_MANUAL}" ]; then
+        HOSTNAME="${HOSTNAME_MANUAL}"
     fi
     PS1="\D{%T} ${VENV}"
 
