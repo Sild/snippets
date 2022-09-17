@@ -18,20 +18,22 @@ if [ -t 0 ] ; then  # input is a terminal
     GITBR="$(parse_git_branch)"
     GITBRANCH=""
     if [[ ${GITBR} ]]; then
-        GITBRANCH="${PINK}${GITBR} "
+        GITBRANCH="${DARK_GRAY}[${GITBR}] "
     fi
+    ENV_INFO="${VENV}${GITBRANCH}"
+
     HOSTNAME="\h"
     if [ "${HOSTNAME_MANUAL}" ]; then
         HOSTNAME="${HOSTNAME_MANUAL}"
     fi
-    PS1="\D{%T} ${VENV}${GITBRANCH}"
 
+    PS1=""
     if [ ${LAST_CODE} = 0 ]; then
         PS1="${PS1}${CYAN}\u@${HOSTNAME}"
     else
         PS1="${PS1}${RED}\u@${HOSTNAME}"
     fi
-    PS1="${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
+    PS1="${ENV_INFO}\n${WHITE}\D{%T} ${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
 
     '
     export GREP_OPTIONS='--color=always'
