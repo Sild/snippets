@@ -11,16 +11,24 @@ if [ -t 0 ] ; then  # input is a terminal
     PINK="\[\033[01;35m\]"
     PROMPT_COMMAND='
     LAST_CODE=$?
+
+    # git branch handler
+    GITBR="$(parse_git_branch)"
+    GITBRANCH=""
+    if [[ ${GITBR} ]]; then
+        GITBRANCH="${DARK_GRAY}[${GITBR}]"
+    fi
+    # python env handler
     VENV=""
     if [[ ${VIRTUAL_ENV} ]]; then
         VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
     fi
-    GITBR="$(parse_git_branch)"
-    GITBRANCH=""
-    if [[ ${GITBR} ]]; then
-        GITBRANCH="${DARK_GRAY}[${GITBR}] "
+
+    # collide env info
+    ENV_INFO=""
+    if [ "${VENV}" -o "${GITBRANCH}" ]; then
+        ENV_INFO="${VENV}${GITBRANCH}\n"
     fi
-    ENV_INFO="${VENV}${GITBRANCH}"
 
     HOSTNAME="\h"
     if [ "${HOSTNAME_MANUAL}" ]; then
@@ -33,7 +41,7 @@ if [ -t 0 ] ; then  # input is a terminal
     else
         PS1="${PS1}${RED}\u@${HOSTNAME}"
     fi
-    PS1="${ENV_INFO}\n${WHITE}\D{%T} ${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
+    PS1="${ENV_INFO}${WHITE}\D{%T} ${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
 
     '
     export GREP_OPTIONS='--color=always'
