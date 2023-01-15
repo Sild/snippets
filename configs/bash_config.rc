@@ -21,22 +21,17 @@ if [ -t 0 ] ; then  # input is a terminal
 
         LAST_CODE=$?
 
-        # git branch handler
-        GITBR="$(parse_git_branch)"
-        GITBRANCH=""
-        if [[ ${GITBR} ]]; then
-            GITBRANCH="${DARK_GRAY}[${GITBR}]"
-        fi
         # python env handler
         VENV=""
         if [[ ${VIRTUAL_ENV} ]]; then
             VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
         fi
 
-        # collide env info
-        ENV_INFO=""
-        if [ "${VENV}" -o "${GITBRANCH}" ]; then
-            ENV_INFO="${VENV}${GITBRANCH}\n"
+        # git branch handler
+        GITBR="$(parse_git_branch)"
+        GITBRANCH=""
+        if [[ ${GITBR} ]]; then
+            GITBRANCH="${DARK_GRAY}[${GITBR}]"
         fi
 
         HOSTNAME="\h"
@@ -51,7 +46,8 @@ if [ -t 0 ] ; then  # input is a terminal
         fi
 
         COMMAND_DURATION="$(expr $(date +%s) - ${COMMAND_START})"
-        PS1="[${COMMAND_DURATION} sec] ${ENV_INFO}${WHITE}\D{%T} ${PROMPT_COLOR}\u@${HOSTNAME}${WHITE}:${BLUE}\w${WHITE}\$ "
+        PS1="[${COMMAND_DURATION} sec] ${VENV}${GITBRANCH}\n${WHITE}\D{%T} ${PROMPT_COLOR}\u@${HOSTNAME}${WHITE}:${BLUE}\w${WHITE}\$ "
+
         # must be the last command
         unset COMMAND_START
 
