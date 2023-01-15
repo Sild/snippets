@@ -1,7 +1,15 @@
 # prompt
+
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
+
+function timer_start {
+    COMMAND_START=${COMMAND_START:-$(date +%s)}
+}
+
+trap 'timer_start' DEBUG
+
 if [ -t 0 ] ; then  # input is a terminal
     DARK_GRAY="\[\033[90m\]"
     RED="\[\033[31m\]"
@@ -10,38 +18,42 @@ if [ -t 0 ] ; then  # input is a terminal
     BLUE="\[\033[01;34m\]"
     PINK="\[\033[01;35m\]"
     PROMPT_COMMAND='
-    LAST_CODE=$?
 
-    # git branch handler
-    GITBR="$(parse_git_branch)"
-    GITBRANCH=""
-    if [[ ${GITBR} ]]; then
-        GITBRANCH="${DARK_GRAY}[${GITBR}]"
-    fi
-    # python env handler
-    VENV=""
-    if [[ ${VIRTUAL_ENV} ]]; then
-        VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
-    fi
+        LAST_CODE=$?
 
-    # collide env info
-    ENV_INFO=""
-    if [ "${VENV}" -o "${GITBRANCH}" ]; then
-        ENV_INFO="${VENV}${GITBRANCH}\n"
-    fi
+        # git branch handler
+        GITBR="$(parse_git_branch)"
+        GITBRANCH=""
+        if [[ ${GITBR} ]]; then
+            GITBRANCH="${DARK_GRAY}[${GITBR}]"
+        fi
+        # python env handler
+        VENV=""
+        if [[ ${VIRTUAL_ENV} ]]; then
+            VENV="${DARK_GRAY}[$(basename ${VIRTUAL_ENV})] "
+        fi
 
-    HOSTNAME="\h"
-    if [ "${HOSTNAME_MANUAL}" ]; then
-        HOSTNAME="${HOSTNAME_MANUAL}"
-    fi
+        # collide env info
+        ENV_INFO=""
+        if [ "${VENV}" -o "${GITBRANCH}" ]; then
+            ENV_INFO="${VENV}${GITBRANCH}\n"
+        fi
 
-    PS1=""
-    if [ ${LAST_CODE} = 0 ]; then
-        PS1="${PS1}${CYAN}\u@${HOSTNAME}"
-    else
-        PS1="${PS1}${RED}\u@${HOSTNAME}"
-    fi
-    PS1="${ENV_INFO}${WHITE}\D{%T} ${PS1}${WHITE}:${BLUE}\w${WHITE}\$ "
+        HOSTNAME="\h"
+        if [ "${HOSTNAME_MANUAL}" ]; then
+            HOSTNAME="${HOSTNAME_MANUAL}"
+        fi
+
+        if [ ${LAST_CODE} = 0 ]; then
+            PROMPT_COLOR="${CYAN}"
+        else
+            PROMPT_COLOR="${RED}"
+        fi
+
+        COMMAND_DURATION="$(expr $(date +%s) - ${COMMAND_START})"
+        PS1="[${COMMAND_DURATION} sec] ${ENV_INFO}${WHITE}\D{%T} ${PROMPT_COLOR}\u@${HOSTNAME}${WHITE}:${BLUE}\w${WHITE}\$ "
+        # must be the last command
+        unset COMMAND_START
 
     '
     export GREP_OPTIONS='--color=always'
