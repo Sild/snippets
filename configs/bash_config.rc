@@ -4,6 +4,12 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+parse_k8s_ctx() {
+      K8SCTX="$(cat ~/.kube/config 2>/dev/null | grep --color=never "current-context:" | grep -Eo --color=never "dqs|prod")"
+      #echo "${K8SCTX}/$(cat ~/.kube/config 2>/dev/null | grep --color=never "current-context:" | awk -F'/' '{print $2}')"
+      echo "${K8SCTX}"
+}
+
 function timer_start {
     COMMAND_START=${COMMAND_START:-$(date +%s)}
 }
@@ -34,6 +40,13 @@ if [ -t 0 ] ; then  # input is a terminal
             GITBRANCH="${DARK_GRAY}[${GITBR}]"
         fi
 
+        # k8s context
+        K8SCTX="$(parse_k8s_ctx)"
+        K8S=""
+        if [[ ${K8SCTX} ]]; then
+            K8S="${DARK_GRAY}[k8s:${K8SCTX}]"
+        fi
+
         HOSTNAME="\h"
         if [ "${HOSTNAME_MANUAL}" ]; then
             HOSTNAME="${HOSTNAME_MANUAL}"
@@ -45,8 +58,8 @@ if [ -t 0 ] ; then  # input is a terminal
             PROMPT_COLOR="${RED}"
         fi
 
-        COMMAND_DURATION="$(expr $(date +%s) - ${COMMAND_START})"
-        PS1="[${COMMAND_DURATION} sec] ${VENV}${GITBRANCH}\n${WHITE}\D{%T} ${PROMPT_COLOR}\u@${HOSTNAME}${WHITE}:${BLUE}\w${WHITE}\$ "
+        COMMAND_DURATION="$(expr $(date +%s) - ${COMMAND_START:-$(date +%s)} 2>/dev/null)"
+        PS1="[${COMMAND_DURATION} sec] ${VENV}${K8S}${GITBRANCH}\n${WHITE}\D{%T} ${PROMPT_COLOR}\u@${HOSTNAME}${WHITE}:${BLUE}\w${WHITE}\$ "
 
         # must be the last command
         unset COMMAND_START
@@ -69,3 +82,4 @@ alias gitst="git status"
 alias gitrebaseammend="git commit --amend --no-edit && git stash && git rebase --continue"
 alias gitrebaseammenda="git commit -a --amend --no-edit && git stash && git rebase --continue"
 alias gitpiskomerilka='git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae "^author "|sort|uniq -c|sort -nr'
+alias ls='ls --color'
