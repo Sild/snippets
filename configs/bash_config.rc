@@ -70,6 +70,11 @@ if [ -t 0 ] ; then  # input is a terminal
 fi
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# brew install bash-completion
+if [ -f "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then source "/opt/homebrew/etc/profile.d/bash_completion.sh"; fi
+# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+if [ -f '~/.git-completion.bash' ]; then source '~/.git-completion.bash'; fi
+
 # common aliases
 alias gitbr="git branch"
 alias gitcmt="git commit -a"
