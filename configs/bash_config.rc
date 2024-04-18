@@ -87,4 +87,7 @@ alias gitst="git status"
 alias gitrebaseammend="git commit --amend --no-edit && git stash && git rebase --continue"
 alias gitrebaseammenda="git commit -a --amend --no-edit && git stash && git rebase --continue"
 alias gitpiskomerilka='git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae "^author "|sort|uniq -c|sort -nr'
+
 alias ls='ls --color'
+alias cdwork="cd ~/Projects/Work/"
+alias cdpers="cd ~/Projects/Personal/"
