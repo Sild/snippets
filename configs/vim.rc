@@ -15,12 +15,14 @@ set laststatus=2
 set colorcolumn=120
 set cursorline
 set cursorcolumn
+set number
 set hlsearch   " search result hightlighted
 set autoindent " new lines inherit the indentation of previous lines.
 set incsearch  " Incremental search that shows partial matches.
 set ignorecase " Ignore case when searching.
 set smartcase  " Automatically switch search to case-sensitive when search query contains an uppercase letter.
 set ruler      " show line/column of cursor
+set statusline+=%F
 
 hi CursorLine   cterm=NONE ctermbg=darkgray ctermfg=white guibg=darkred
 hi CursorColumn cterm=NONE ctermbg=darkgray ctermfg=white guibg=darkred
