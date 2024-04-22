@@ -89,3 +89,6 @@ alias gitcontribstat="git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//
 alias ls='ls --color'
 alias cdwork="cd ~/Projects/Work/"
 alias cdpers="cd ~/Projects/Personal/"
+
+# don't close session with ctrl+D
+IGNOREEOF=2
