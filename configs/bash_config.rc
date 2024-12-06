@@ -90,5 +90,15 @@ alias ls='ls --color'
 alias cdwork="cd ~/Projects/Work/"
 alias cdpers="cd ~/Projects/Personal/"
 
+# cargo
+alias cargo_depgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
+alias cargo_fix="cargo clippy --fix"
+alias cargo_fmt="cargo +nightly fmt"
+
+
+
+
+
+
 # don't close session with ctrl+D
 IGNOREEOF=2
