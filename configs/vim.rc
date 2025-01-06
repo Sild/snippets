@@ -31,3 +31,6 @@ syntax on
 hi ColorColumn  ctermbg=darkgray
 hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
 
+autocmd BufEnter *.yaml syntax off
+autocmd BufEnter *.yml syntax off
+

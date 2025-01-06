@@ -1,4 +1,5 @@
 # prompt
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
@@ -75,6 +76,8 @@ if [ -f "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then source "/opt/ho
 # curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 if [ -f '~/.git-completion.bash' ]; then source '~/.git-completion.bash'; fi
 
+
+
 # common aliases
 alias gitbr="git branch"
 alias gitcmt="git commit -a"
@@ -88,6 +91,7 @@ alias gitst="git status"
 alias gitcontribstat="git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae \"^author \" | sort | uniq -c | sort -nr"
 
 alias ls='ls --color'
+alias k9s="XDG_CONFIG_HOME=${SCRIPT_DIR} k9s"
 alias cdwork="cd ~/Projects/Work/"
 alias cdpers="cd ~/Projects/Personal/"
 
@@ -96,10 +100,6 @@ alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| do
 alias cargofix="cargo clippy --fix"
 alias cargofmt="cargo +nightly fmt"
 alias cargotest="cargo nextest run"
-
-
-
-
 
 
 # don't close session with ctrl+D
