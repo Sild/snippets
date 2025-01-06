@@ -78,6 +78,7 @@ if [ -f '~/.git-completion.bash' ]; then source '~/.git-completion.bash'; fi
 # common aliases
 alias gitbr="git branch"
 alias gitcmt="git commit -a"
+alias gitammend="git commit -a --amend"
 alias gitcheck="git diff origin/master --check"
 alias gitco="git checkout"
 alias gitlog="git log --decorate --graph --abbrev-commit --date=relative"
@@ -91,9 +92,10 @@ alias cdwork="cd ~/Projects/Work/"
 alias cdpers="cd ~/Projects/Personal/"
 
 # cargo
-alias cargo_depgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
-alias cargo_fix="cargo clippy --fix"
-alias cargo_fmt="cargo +nightly fmt"
+alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
+alias cargofix="cargo clippy --fix"
+alias cargofmt="cargo +nightly fmt"
+alias cargotest="cargo nextest run"
 
 
 
