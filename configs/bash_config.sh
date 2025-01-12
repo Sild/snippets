@@ -77,7 +77,6 @@ if [ -f "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then source "/opt/ho
 if [ -f '~/.git-completion.bash' ]; then source '~/.git-completion.bash'; fi
 
 
-
 # common aliases
 alias gitbr="git branch"
 alias gitcmt="git commit -a"
@@ -92,8 +91,9 @@ alias gitcontribstat="git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//
 
 alias ls='ls --color'
 alias k9s="XDG_CONFIG_HOME=${SCRIPT_DIR} k9s"
-alias cdwork="cd ~/Projects/Work/"
-alias cdpers="cd ~/Projects/Personal/"
+alias cdpers="cd ~/Personal/Projects"
+alias cdext="cd ~/Personal/ProjectsExternal"
+alias cdsnippet="cd ~/Personal/Projects/snippets"
 
 # cargo
 alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
