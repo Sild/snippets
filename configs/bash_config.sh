@@ -88,6 +88,7 @@ alias gitrmremote="git push origin --delete"
 alias gitrmlocal="git branch -D"
 alias gitst="git status"
 alias gitcontribstat="git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae \"^author \" | sort | uniq -c | sort -nr"
+alias gitupfull="gitco main && git pull --rebase && gitco -"
 
 alias ls='ls --color'
 alias k9s="XDG_CONFIG_HOME=${SCRIPT_DIR} k9s"
