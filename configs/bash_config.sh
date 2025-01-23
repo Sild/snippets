@@ -92,9 +92,9 @@ alias gitupfull="gitco main && git pull --rebase && gitco -"
 
 alias ls='ls --color'
 alias k9s="XDG_CONFIG_HOME=${SCRIPT_DIR} k9s"
-alias cdpers="cd ~/Personal/Projects"
-alias cdext="cd ~/Personal/ProjectsExternal"
-alias cdsnippet="cd ~/Personal/Projects/snippets"
+alias cdpers="cd ~/Projects/Personal"
+alias cdext="cd ~/Projects/External"
+alias cdsnippet="cd ~/Projects/Personal/snippets"
 
 # cargo
 alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
