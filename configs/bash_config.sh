@@ -98,7 +98,7 @@ alias cdsnippet="cd ~/Projects/Personal/snippets"
 
 # cargo
 alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
-alias cargofix="cargo clippy --fix"
+alias cargofix="cargo clippy --fix && cargo fmt"
 alias cargofmt="cargo +nightly fmt"
 alias cargotest="cargo nextest run"
 
