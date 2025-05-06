@@ -80,7 +80,7 @@ if [ -f '~/.git-completion.bash' ]; then source '~/.git-completion.bash'; fi
 # common aliases
 alias gitbr="git branch"
 alias gitcmt="git commit -a"
-alias gitammend="git commit -a --amend"
+alias gitammend="git commit -a --amend --date=now"
 alias gitcheck="git diff origin/master --check"
 alias gitco="git checkout"
 alias gitlog="git log --decorate --graph --abbrev-commit --date=relative"
@@ -98,9 +98,9 @@ alias cdsnippet="cd ~/Projects/Personal/snippets"
 
 # cargo
 alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
-alias cargofix="cargo clippy --fix && cargo +nightly fmt"
+alias cargofix="cargo clippy --fix --all-features && cargo +nightly fmt"
 alias cargofmt="cargo +nightly fmt"
-alias cargotest="cargo nextest run"
+alias cargotest="cargo nextest run --all-features"
 
 
 # don't close session with ctrl+D
