@@ -88,7 +88,7 @@ alias gitrmremote="git push origin --delete"
 alias gitrmlocal="git branch -D"
 alias gitst="git status"
 alias gitcontribstat="git ls-tree -r -z --name-only HEAD -- */*  | sed 's/^/.\//' | xargs -0 -n1 git blame --line-porcelain HEAD |grep -ae \"^author \" | sort | uniq -c | sort -nr"
-alias gitupfull="gitco main && git pull --rebase && gitco -"
+alias gitupfull="gitco main && git pull --rebase && gitco - && git rebase main"
 
 alias ls='ls --color'
 alias k9s="XDG_CONFIG_HOME=${SCRIPT_DIR} k9s"
@@ -98,9 +98,9 @@ alias cdsnippet="cd ~/Projects/Personal/snippets"
 
 # cargo
 alias cargodepgraph="cargo depgraph --workspace-only --dedup-transitive-deps| dot -Tpng > graph.png"
-alias cargofix="cargo clippy --fix --all-features && cargo +nightly fmt"
+alias cargofix="cargo clippy --fix --all-features && cargo +nightly fmt && cargo fix --all --tests"
 alias cargofmt="cargo +nightly fmt"
-alias cargotest="cargo nextest run --all-features"
+alias cargotest="cargo nextest run"
 
 
 # don't close session with ctrl+D
